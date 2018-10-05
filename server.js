@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 
+let listenPort = process.env.PORT || 3000;
+
 const signup = require('./controllers/signup');
 const login = require('./controllers/login');
 const image = require('./controllers/image');
@@ -28,6 +30,6 @@ app.post('/login', login.handleLogin(db, bcrypt))
 app.post('/signup', (req, res) => { signup.handleSignup(req, res, db, bcrypt) })
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 
-app.listen(3000, ()=> {
-  console.log('app is running on port 3000');
+app.listen(listenPort, ()=> {
+  console.log(`app is running on port ${listenPort}`);
 })
